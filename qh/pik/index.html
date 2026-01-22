@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QH Cottage — Official Website</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --green:#4B2E1F;
+  --brown:#7A4A2E;
+  --cream:#F5F1EC;
+  --gold:#C9A24D;
+  --dark:#1F1A17;
+  --shadow:0 12px 32px rgba(0,0,0,0.18);
+  --radius:14px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:var(--cream);
+  color:var(--dark);
+  scroll-behavior:smooth;
+}
+
+/* ================= HEADER ================= */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 22px;
+  background:#2B1B12;
+  position:sticky;
+  top:0;
+  z-index:50;
+  box-shadow:var(--shadow);
+}
+
+.logo img{
+  height:48px;
+  border-radius:10px;
+}
+
+nav{
+  display:flex;
+  gap:18px;
+}
+nav a{
+  color:#E8DCCF;
+  text-decoration:none;
+  font-weight:600;
+}
+nav a:hover{color:var(--gold)}
+
+.menu-toggle{
+  display:none;
+  color:#fff;
+  font-size:26px;
+  cursor:pointer;
+}
+
+@media(max-width:768px){
+  nav{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:70px;
+    right:20px;
+    background:#fff;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+  }
+  nav a{color:#333}
+  nav.show{display:flex}
+  .menu-toggle{display:block}
+}
+
+/* ================= HERO ================= */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    url("banner.webp") center/cover no-repeat,
+    #111;   /* fallback color */
+}
+
+
+.hero-content{
+  background:rgba(0,0,0,0.4);
+  padding:35px 30px;
+  border-radius:18px;
+  max-width:650px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.hero-content h1{
+  font-family:"Playfair Display",serif;
+  font-size:52px;
+  color:#fff;
+  margin:0 0 10px;
+}
+
+.hero-content p{
+  color:#eee;
+  font-size:18px;
+  margin-bottom:25px;
+}
+
+.btn{
+  padding:14px 26px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#7A4A2E,#4B2E1F);
+  color:#fff;
+}
+
+.btn-primary:hover{transform:scale(1.05)}
+
+@media(max-width:768px){
+  .hero{min-height:70vh}
+  .hero-content h1{font-size:30px}
+  .hero-content p{font-size:15px}
+}
+
+/* ================= SECTIONS ================= */
+section{
+  padding:70px 20px;
+  max-width:1200px;
+  margin:auto;
+}
+
+h2{
+  text-align:center;
+  font-family:"Playfair Display",serif;
+  color:#4B2E1F;
+}
+h2::after{
+  content:"";
+  display:block;
+  width:70px;
+  height:3px;
+  background:var(--gold);
+  margin:10px auto;
+}
+
+/* ================= PRODUCTS ================= */
+#filterBtns{text-align:center;margin-bottom:20px}
+#filterBtns button{
+  margin:6px;
+  padding:8px 16px;
+  border-radius:20px;
+  border:1px solid var(--brown);
+  background:#fff;
+  color:var(--brown);
+  cursor:pointer;
+}
+#filterBtns button.active,
+#filterBtns button:hover{
+  background:var(--brown);
+  color:#fff;
+}
+
+#productGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:20px;
+}
+
+.product{
+  background:#fff;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.product img{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+  cursor:pointer;
+}
+
+.product h3{margin:12px;color:#4B2E1F}
+.product p{margin:0 12px;color:#666}
+.size{margin:0 12px 10px;font-weight:600}
+
+.actions{text-align:center;padding:12px}
+
+/* ================= CART ================= */
+#cartBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  border:none;
+  background:#2B1B12;
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+}
+
+#cartCount{
+  position:absolute;
+  top:8px;
+  right:8px;
+  background:#fff;
+  color:#2B1B12;
+  border-radius:50%;
+  padding:2px 6px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modal-content{
+  background:#FAF6F1;
+  padding:20px;
+  border-radius:14px;
+  width:90%;
+  max-width:500px;
+}
+
+.confirm-btn{
+  background:#25d366;
+  color:#fff;
+  width:100%;
+  margin-top:10px;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#2B1B12;
+  color:#E8DCCF;
+  text-align:center;
+  padding:30px 20px;
+}
+
+/* IMAGE MODAL */
+#imgModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+
+.banner-pic{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:15px;
+  border: 4px solid #fff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.jpeg" alt="QH Cottage">
+  </div>
+
+  <nav id="navbar">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#shop">Shop</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-content">
+    <img src="logo.jpeg" alt="Banner Pic" class="banner-pic">
+    <h1>QH Cottage</h1>
+    <p>Premium Leather Goods & Apparel</p>
+    <a href="#shop" class="btn btn-primary">Shop Now</a>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="about-container">
+    <h2>About QH Cottage</h2>
+    <p>
+      Cottage House is a registered and professional trading company based in Sialkot, Pakistan. We are
+      approved by the Sialkot Chamber of Commerce & Industry (SCCI) and operate in both local and
+      international markets. Our core business is focused on leather products and accessories, and we
+      aim to deliver high-quality items with modern designs and excellent durability.
+    </p>
+    <p>
+      We offer a wide range of products including leather jackets, gloves, belts, caps, and leather
+      care kits. Each product is carefully selected and tested to ensure it meets international
+      standards. We work with experienced manufacturers and suppliers to maintain consistency in
+      quality and timely delivery.
+    </p>
+    <p>
+      Our mission is to provide premium leather goods that combine style, comfort, and affordability.
+      We are committed to customer satisfaction and strive to build long-term relationships with our
+      clients. Whether you are a retailer, wholesaler, or individual customer, QH Cottage is your
+      trusted partner for high-quality leather products.
+    </p>
+    <p>
+      We believe in transparency, professionalism, and reliable service. Our team is always ready to
+      assist you with product inquiries, custom orders, and shipping information. Thank you for
+      choosing QH Cottage — where quality meets style.
+    </p>
+  </div>
+</section>
+
+
+<section id="faq" style="padding:70px 20px;max-width:900px;margin:auto;">
+  <h2 style="font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:30px;">Frequently Asked Questions</h2>
+
+  <div style="background:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.08);padding:20px;margin-bottom:15px;">
+    <h3 style="margin:0;font-size:18px;color:#6b3e1e;">What products does QH Cottage offer?</h3>
+    <p style="margin:10px 0 0;color:#555;">We offer premium leather jackets, belts, gloves.</p>
+  </div>
+
+  <div style="background:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.08);padding:20px;margin-bottom:15px;">
+    <h3 style="margin:0;font-size:18px;color:#6b3e1e;">Do you ship internationally?</h3>
+    <p style="margin:10px 0 0;color:#555;">Yes! We ship worldwide with reliable courier services. You can pay via cash-on-delivery (in Pakistan) or online payment methods.</p>
+  </div>
+
+  <div style="background:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.08);padding:20px;margin-bottom:15px;">
+    <h3 style="margin:0;font-size:18px;color:#6b3e1e;">Can I customize my order?</h3>
+    <p style="margin:10px 0 0;color:#555;">Yes, we accept custom orders for leather jackets, gloves, and other products. Specify your requirements while placing the order.</p>
+  </div>
+
+  <div style="background:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.08);padding:20px;">
+    <h3 style="margin:0;font-size:18px;color:#6b3e1e;">How can I place an order?</h3>
+    <p style="margin:10px 0 0;color:#555;">Add your desired items to the cart and click "Checkout (Email)" to send your order. You can also reach out via Instagram or WhatsApp for assistance.</p>
+  </div>
+</section>
+
+<section id="shop">
+  <h2>Our Catalogue</h2>
+
+  <div id="filterBtns">
+    <button class="active" onclick="filterCategory('all',this)">All</button>
+    <button onclick="filterCategory('Leather Jackets',this)">Leather Jackets</button>
+    <button onclick="filterCategory('Gloves',this)">Gloves</button>
+    <button onclick="filterCategory('Shiner Kit',this)">Leather Shiner Kit</button>
+    <button onclick="filterCategory('belt',this)">Belt</button>
+  </div>
+
+  <div id="productGrid"></div>
+</section>
+
+<section id="contact" style="padding:70px 20px;max-width:900px;margin:auto;">
+  <h2 style="font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:30px;">Contact Us</h2>
+
+  <form onsubmit="sendMessage(event)" style="background:#fff;padding:30px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.08);max-width:600px;margin:auto;">
+    <input type="text" id="name" placeholder="Enter your name" required
+           style="width:100%;padding:14px 16px;margin-bottom:15px;border:1px solid #ccc;border-radius:12px;font-size:16px;transition:0.3s;">
+    <input type="email" id="email" placeholder="Enter your email" required
+           style="width:100%;padding:14px 16px;margin-bottom:15px;border:1px solid #ccc;border-radius:12px;font-size:16px;transition:0.3s;">
+    <textarea rows="5" id="message" placeholder="Write your message here..." required
+              style="width:100%;padding:14px 16px;margin-bottom:20px;border:1px solid #ccc;border-radius:12px;font-size:16px;transition:0.3s;resize:none;"></textarea>
+    <button class="btn btn-primary" type="submit" 
+            style="width:100%;font-size:18px;padding:14px;border-radius:12px;background:#6b3e1e;color:#fff;border:none;cursor:pointer;transition:0.3s;">
+      Send Message
+    </button>
+  </form>
+
+  <div style="text-align:center;margin-top:30px;">
+    <a href="https://wa.me/923426483104" target="_blank" 
+       style="background:#25d366;width:70px;height:70px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;margin:10px;box-shadow:0 4px 10px rgba(0,0,0,0.2);text-decoration:none;transition:0.3s;">
+       <i class="fab fa-whatsapp" style="color:#fff;font-size:34px;"></i>
+    </a>
+
+    <a href="https://www.instagram.com/ridex_perts?igsh=MWd1ZnlhdjM1MGIzbg==" target="_blank" 
+       style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);width:70px;height:70px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;margin:10px;box-shadow:0 4px 10px rgba(0,0,0,0.2);text-decoration:none;transition:0.3s;">
+       <i class="fab fa-instagram" style="color:#fff;font-size:34px;"></i>
+    </a>
+  </div>
+
+  <iframe src="https://maps.google.com/maps?q=Sialkot%20Pakistan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          style="border-radius:16px;width:100%;height:300px;border:0;margin-top:25px;"></iframe>
+</section>
+
+<button id="cartBtn">🛒<span id="cartCount">0</span></button>
+
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <button class="btn confirm-btn" onclick="confirmOrder()">Confirm via WhatsApp</button>
+    <button class="btn" onclick="closeCart()" style="width:100%;margin-top:8px;">Close</button>
+  </div>
+</div>
+
+<!-- IMAGE FULL VIEW MODAL (ONLY ONCE) -->
+<div id="imgModal" class="modal">
+  <span onclick="closeImage()" style="position:absolute;top:20px;right:30px;font-size:40px;color:#fff;cursor:pointer;">&times;</span>
+  <img id="modalImg" src="" style="max-width:90%;max-height:90%;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.6);">
+</div>
+
+<footer>
+  <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:15px;align-items:center;">
+    <a href="https://wa.me/923426483104" target="_blank"
+       style="background:#25d366;width:45px;height:45px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;transition:0.3s;">
+       <i class="fab fa-whatsapp" style="color:#fff;font-size:20px;"></i>
+    </a>
+
+    <a href="https://www.instagram.com/ridex_perts" target="_blank"
+       style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);width:45px;height:45px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;transition:0.3s;">
+       <i class="fab fa-instagram" style="color:#fff;font-size:20px;"></i>
+    </a>
+
+    <a href="https://www.facebook.com/profile.php?id=61567637155179" target="_blank"
+       style="background:#1877F2;width:45px;height:45px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;transition:0.3s;">
+       <i class="fab fa-facebook-f" style="color:#fff;font-size:20px;"></i>
+    </a>
+
+    <a href="https://www.tiktok.com/@qhcottage" target="_blank"
+       style="background:#000;width:45px;height:45px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;transition:0.3s;">
+       <i class="fab fa-tiktok" style="color:#fff;font-size:20px;"></i>
+    </a>
+
+    <a href="mailto:qhcottageofficial@gmail.com" target="_blank"
+       style="background:#EA4335;width:45px;height:45px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;transition:0.3s;">
+       <i class="fas fa-envelope" style="color:#fff;font-size:20px;"></i>
+    </a>
+  </div>
+
+  <p style="margin-top:18px;color:#E8DCCF;">© 2025 QH Cottage — All Rights Reserved</p>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navbar").classList.toggle("show");
+}
+
+const products=[
+  {name:"Biker Jacket",cat:"Leather Jackets",size:"S/M/L/XL/XXL",img:"img6.jpg"},
+  {name:"Trench Leather Coat",cat:"Leather Jackets",size:"S/M/L/XL/XXL",img:"img18.jpg"},
+  {name:"Bomber Jacket",cat:"Leather Jackets",size:"S/M/L/XL/XXL",img:"img4.jpg"},
+  {name:"Blazer Style Leather Jacket",cat:"Leather Jackets",size:"S/M/L/XL/XXL",img:"img2.jpg"},
+  {name:"Driving Gloves",cat:"Gloves",size:"S/M/L/XL/XXL",img:"img17.jpg"},
+  {name:"Riding Gloves",cat:"Gloves",size:"S/M/L/XL/XXL",img:"img12.jpg"},
+  {name:"Thermal Gloves",cat:"Gloves",size:"S/M/L/XL/XXL",img:"img16.jpg"},
+  {name:"Casual Gloves",cat:"Gloves",size:"S/M/L/XL/XXL",img:"img7.jpg"},
+  {name:"Sports Gloves",cat:"Gloves",size:"S/M/L/XL/XXL",img:"img15.jpg"},
+  {name:"Safety Gloves",cat:"Gloves",size:"S/M/L/XL/XXL",img:"img1.jpg"},
+  {name:"Leather Shiner Kit",cat:"Shiner Kit",size:"250 Ml",img:"img13.jpg"},
+  {name:"Leather Caps Boys",cat:"Caps",size:"S/M/L inch",img:"img9.jpg"},
+  {name:"Leather Caps Girls",cat:"Caps",size:"S/M / L",img:"img5.jpg"},
+  {name:"Formal Dress Belt",cat:"belt",size:"All Size",img:"img11.jpg"},
+  {name:"Reversible Belt",cat:"belt",size:"All Size",img:"img8.jpg"},
+  {name:"Western Belt",cat:"belt",size:"All Size",img:"img14.jpg"}
+];
+
+const grid=document.getElementById("productGrid");
+const cart=[];
+
+function renderProducts(filter="all"){
+  grid.innerHTML="";
+  products.filter(p=>filter==="all"||p.cat===filter)
+  .forEach((p,i)=>{
+    grid.innerHTML+=`
+    <div class="product">
+      <img src="${p.img}" onclick="openImage('${p.img}')">
+      <h3>${p.name}</h3>
+      <p>${p.cat}</p>
+      <p class="size">Size: ${p.size}</p>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="addToCart(${i})">Add to Cart</button>
+      </div>
+    </div>`;
+  });
+}
+renderProducts();
+
+function filterCategory(cat,btn){
+  document.querySelectorAll("#filterBtns button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderProducts(cat);
+}
+
+function addToCart(i){
+  cart.push(products[i]);
+  document.getElementById("cartCount").innerText=cart.length;
+}
+
+document.getElementById("cartBtn").onclick=()=>{
+  document.getElementById("cartModal").style.display="flex";
+  document.getElementById("cartItems").innerHTML=
+    cart.map(p=>`<p>${p.name} (${p.size})</p>`).join("") || "Cart is empty";
+};
+
+function closeCart(){
+  document.getElementById("cartModal").style.display="none";
+}
+
+function confirmOrder(){
+  let msg="Order from QH Cottage:\n"+cart.map(p=>p.name).join("\n");
+  window.open("https://wa.me/923426483104?text="+encodeURIComponent(msg));
+}
+
+function openImage(src){
+  document.getElementById("modalImg").src = src;
+  document.getElementById("imgModal").style.display = "flex";
+}
+
+function closeImage(){
+  document.getElementById("imgModal").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
